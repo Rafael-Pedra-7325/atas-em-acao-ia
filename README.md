@@ -1,4 +1,4 @@
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://api-health-monitor-ia.streamlit.app/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://atas-em-acao-ia.streamlit.app/)
 # 📋 Atas em Ação — Organizador de Reuniões com IA e SQL
 
 Aplicação web que transforma anotações não estruturadas de reuniões em um **plano de ação relacional (CRUD)** utilizando **Python**, **APIs REST (LLM)**, **SQLite (SQL)** e **Streamlit**.
