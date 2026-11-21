@@ -54,14 +54,25 @@ def _chamar_modelo(modelo: str, prompt: str, api_key: str) -> List[Dict]:
 
 
 def _buscar_modelos_fallback(api_key: str, excluir: str) -> List[str]:
-    """Consulta a API REST para descobrir outros modelos Gemini ativos na chave."""
+    """Consulta a API REST para descobrir modelos Gemini atuais ativos na chave."""
     try:
         resp = requests.get(f"{BASE_API_URL}/models?key={api_key}", timeout=10)
         if resp.status_code != 200:
             return []
 
         modelos_validos = []
-        termos_ignorados = ("embedding", "imagen", "veo", "tts", "aqa", "robotics")
+        termos_ignorados = (
+            "embedding",
+            "imagen",
+            "veo",
+            "tts",
+            "aqa",
+            "robotics",
+            "1.0",
+            "1.5",
+            "2.0",
+            "2.5",
+        )
 
         for item in resp.json().get("models", []):
             nome = item.get("name", "").replace("models/", "")
@@ -74,11 +85,11 @@ def _buscar_modelos_fallback(api_key: str, excluir: str) -> List[str]:
             ):
                 modelos_validos.append(nome)
 
-        # Prioriza variantes flash/lite por serem mais rápidas
+        # Prioriza variantes flash/lite atuais
         modelos_validos.sort(
             key=lambda m: (0 if ("flash" in m or "lite" in m) else 1, m)
         )
-        return modelos_validos[:3]
+        return modelos_validos[:6]
     except Exception:
         return []
 
@@ -116,7 +127,7 @@ def extrair_tarefas_via_rest(notas_reuniao: str, api_key: str) -> List[Dict]:
             if tentativa < 2:
                 time.sleep(2)
 
-    # 2. Se o modelo principal estiver sobrecarregado (503/429), aciona fallback automático
+    # 2. Aciona fallback automático apenas entre modelos atuais da conta
     for modelo_alt in _buscar_modelos_fallback(chave, excluir=MODELO_PRINCIPAL):
         try:
             return _chamar_modelo(modelo_alt, prompt, chave)
