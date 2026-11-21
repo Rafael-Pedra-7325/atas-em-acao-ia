@@ -7,7 +7,7 @@ Equipes técnicas e de negócio frequentemente terminam reuniões com anotaçõe
 
 ## 🛠️ Arquitetura e Tecnologias
 - **Python 3**: Lógica de aplicação e manipulação de dados.
-- **API REST (`requests`)**: Integração direta via HTTP `POST` com a API do Google Gemini (`gemini-2.5-flash`), utilizando saída estruturada (`application/json`) para evitar erros de parsing.
+- **API REST (`requests`)**: Integração direta via HTTP `POST` com a API do Google Gemini (`gemini-3.8-flash`), utilizando saída estruturada (`application/json`) para evitar erros de parsing.
 - **Banco de Dados Relacional (`SQLite` / SQL)**:
   - Modelagem com duas tabelas relacionadas (`reunioes` 1:N `tarefas` via `FOREIGN KEY`).
   - Operações completas de **CRUD** (`INSERT` transacional, `SELECT` com `INNER JOIN` e filtros dinâmicos, `GROUP BY` para métricas, `UPDATE` e `DELETE`).
